@@ -1,9 +1,2 @@
-target/classes/com/customrxjava/Observer.class
-target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
-target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
-target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
-target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
-target/surefire-reports/com.customrxjava.ObserverTest.txt
-target/surefire-reports/TEST-com.customrxjava.ObserverTest.xml
-target/test-classes/com/customrxjava/ObserverTest.class
-target/test-classes/com/customrxjava/ObserverTest$TestObserver.class
+target
+.idea
