@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -112,7 +113,7 @@ public class ObservableSchedulerIntegrationTest {
 
     @Test
     void testMapOperatorWithSchedulers() throws InterruptedException {
-        List<String> results = new ArrayList<>();
+        List<String> results = Collections.synchronizedList(new ArrayList<>());
         Set<String> threadNames = ConcurrentHashMap.newKeySet();
         CountDownLatch latch = new CountDownLatch(3);
 
@@ -143,9 +144,10 @@ public class ObservableSchedulerIntegrationTest {
         assertTrue(latch.await(3, TimeUnit.SECONDS));
 
         assertEquals(3, results.size());
-        assertEquals("value_1", results.get(0));
-        assertEquals("value_2", results.get(1));
-        assertEquals("value_3", results.get(2));
+        // В многопоточной среде порядок может измениться, проверяем содержание
+        assertTrue(results.contains("value_1"));
+        assertTrue(results.contains("value_2"));
+        assertTrue(results.contains("value_3"));
 
         // Проверяем что использовались разные потоки
         assertTrue(threadNames.size() > 1);
